@@ -55,3 +55,4 @@ INSERT INTO machine_data VALUES (6, 'Pressure', 127, NOW() - INTERVAL 5 HOUR);
 INSERT INTO machine_data VALUES (6, 'Cycle Time', 52, NOW() - INTERVAL 5 HOUR);
 INSERT INTO machine_data VALUES (6, 'Temperature', 168, NOW() - INTERVAL 6 HOUR);
 INSERT INTO machine_data VALUES (6, 'Pressure', 128, NOW() - INTERVAL 6 HOUR);
+SELECT AVG(d.param_value) FROM machine_data d JOIN machine_details m ON d.machine_id = m.machine_id WHERE m.machine_id = 1 AND d.param_name = 'Temperature'

@@ -56,9 +56,19 @@ def test():
             "machine_id": i,
             "machine_oem": res[i]["OEM"],
             "analytics": res_dict[i],
+            "Temperature Average": 0,
+            "Pressure Average": 0,
+            "Cycle Time Average": 0
         }
         for i in id_list
     ]
+
+    for i in id_list:
+        res2 = SQL(
+            "SELECT d.param_name, AVG(d.param_value) FROM machine_data d JOIN machine_details m ON d.machine_id = m.machine_id WHERE m.machine_id ="+str(i)+" GROUP BY d.param_name;"
+        )
+        for j in res2:
+            final_dict[i-1][j[0]+ " Average"] = j[1]
 
     return jsonify(final_dict)
 
